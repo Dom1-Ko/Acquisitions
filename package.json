@@ -27,6 +27,7 @@
     "db:studio": "drizzle-kit studio",
     "dev:docker": "sh ./scripts/dev.sh",
     "prod:docker": "sh ./scripts/prod.sh",
+    "deploy:k8s-minikube": "sh ./scripts/deploy.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "keywords": [],

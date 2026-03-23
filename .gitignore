@@ -1,3 +1,7 @@
 node_modules
 .env.*
-neon_local/
+# .neon_local
+# logs
+# .dockerignore
+.git
+.gitignore
