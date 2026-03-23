@@ -14,8 +14,6 @@ spec:
   type: LoadBalancer # NodePort # change to LoadBalancer if running in cloud
 
 
-
-
 #   # service.yaml sets up network routing to pods
 # apiVersion: v1
 # kind: Service

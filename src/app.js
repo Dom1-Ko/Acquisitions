@@ -13,8 +13,12 @@ import securityMiddleware from '#middlewares/security.middleware.js';
 const app = express();
 
 //these 2 end pts are for k8s
-app.get('/readyz', (req, res) => {res.status(200).send('ready')});
-app.get('/healthz', (req, res) => {res.status(200).send('ok')});
+app.get('/readyz', (req, res) => {
+  res.status(200).send('ready');
+});
+app.get('/healthz', (req, res) => {
+  res.status(200).send('ok');
+});
 
 app.use(helmet()); //helps secure express js with varius http headers
 
