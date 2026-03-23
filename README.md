@@ -1,2 +1,2 @@
-Testing CI/CD pipelines 
+Testing CI/CD pipelines
 Deploy on k8s
