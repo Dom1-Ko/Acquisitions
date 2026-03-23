@@ -1,68 +1,74 @@
-import logger from "#config/logger.js"
-import { deleteUser, getAllUsers, getUserById, updateUser } from "#services/users.service.js";
-import { formatValidationError } from "#utils/format.js";
-import { updateUserSchema, userIdSchema } from "#validations/users.validation.js";
+import logger from '#config/logger.js';
+import {
+  deleteUser,
+  getAllUsers,
+  getUserById,
+  updateUser,
+} from '#services/users.service.js';
+import { formatValidationError } from '#utils/format.js';
+import {
+  updateUserSchema,
+  userIdSchema,
+} from '#validations/users.validation.js';
 
 export const fetchAllUsers = async (req, res, next) => {
-    try {
-
-        // Only admin users can fetch all users
-        if (req.user && req.user.role !== 'admin') {
-            return res.status(403).json({
-                error: 'Access denied',
-                message: 'Only administrators can fetch all users data'
-            });
-        }
-
-        logger.info('Getting users...');
-
-        const allUsers = await getAllUsers();
-
-        res.json({
-            message: 'Sucessfully retrieved users',
-            users: allUsers,
-            count: allUsers.length,
-        });
-    } catch (e) {
-        logger.error(e);
-        next(e);// pass error to next fn
+  try {
+    // Only admin users can fetch all users
+    if (req.user && req.user.role !== 'admin') {
+      return res.status(403).json({
+        error: 'Access denied',
+        message: 'Only administrators can fetch all users data',
+      });
     }
-}
+
+    logger.info('Getting users...');
+
+    const allUsers = await getAllUsers();
+
+    res.json({
+      message: 'Sucessfully retrieved users',
+      users: allUsers,
+      count: allUsers.length,
+    });
+  } catch (e) {
+    logger.error(e);
+    next(e); // pass error to next fn
+  }
+};
 
 export const fetchUserById = async (req, res, next) => {
-    try {
-        logger.info('Fetching user...');
+  try {
+    logger.info('Fetching user...');
 
-        // Validate the user ID parameter
-        const validationResult = userIdSchema.safeParse({ id: req.params.id });
+    // Validate the user ID parameter
+    const validationResult = userIdSchema.safeParse({ id: req.params.id });
 
-        if (!validationResult.success){
-            return res.status(400).json({
-                error: 'Validation of id failed',
-                details: formatValidationError(validationResult.error)
-
-            });
-        } 
-
-        const { id } = validationResult.data;
-        const user = await getUserById(id);
-
-        logger.info(`User ${user.email} retrieved successfully`);
-
-        res.json({
-            message: 'User retrieved successfully',
-            user,
-        });
-    } catch (e) {
-        logger.error(`Error fetching user by id: ${e.message}`);
-
-        if (e.message === 'User not found') {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        next(e);// pass error to next fn
+    if (!validationResult.success) {
+      return res.status(400).json({
+        error: 'Validation of id failed',
+        details: formatValidationError(validationResult.error),
+      });
     }
-}
+
+    const { id } = validationResult.data;
+    const user = await getUserById(id);
+
+    logger.info(`User ${user.email} retrieved successfully`);
+
+    res.json({
+      message: 'User retrieved successfully',
+      user,
+    });
+  } catch (e) {
+    logger.error(`Error fetching user by id: ${e.message}`);
+
+    if (e.message === 'User not found') {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    next(e); // pass error to next fn
+  }
+};
 
 export const updateUserById = async (req, res, next) => {
   try {
@@ -141,7 +147,6 @@ export const updateUserById = async (req, res, next) => {
     next(e);
   }
 };
-
 
 export const deleteUserById = async (req, res, next) => {
   try {

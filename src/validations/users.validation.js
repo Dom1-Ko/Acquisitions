@@ -4,7 +4,7 @@ export const userIdSchema = z.object({
   id: z
     .string()
     .regex(/^\d+$/, 'ID must be a valid number')
-    .transform(Number) 
+    .transform(Number)
     .refine(val => val > 0, 'ID must be a positive number'),
 });
 

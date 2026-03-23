@@ -1,6 +1,14 @@
-import { deleteUserById, fetchAllUsers, fetchUserById, updateUserById } from '#controllers/users.controller.js';
+import {
+  deleteUserById,
+  fetchAllUsers,
+  fetchUserById,
+  updateUserById,
+} from '#controllers/users.controller.js';
 import express from 'express';
-import { authenticateToken, requireRole } from '#middlewares/auth.midlleware.js';
+import {
+  authenticateToken,
+  requireRole,
+} from '#middlewares/auth.midlleware.js';
 
 const router = express.Router();
 
@@ -14,6 +22,11 @@ router.get('/:id', authenticateToken, fetchUserById);
 router.put('/:id', authenticateToken, updateUserById); // update data is sent using the request body
 
 // delete user by id (admin only)
-router.delete('/:id', authenticateToken, requireRole(['admin']), deleteUserById);       
+router.delete(
+  '/:id',
+  authenticateToken,
+  requireRole(['admin']),
+  deleteUserById
+);
 
 export default router;
