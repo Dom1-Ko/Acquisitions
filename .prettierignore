@@ -3,3 +3,4 @@ coverage/
 drizzle/
 *.log
 package-lock.json
+README.md
