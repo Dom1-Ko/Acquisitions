@@ -11,6 +11,9 @@ A robust Node.js backend for an acquisitions system built with **Express.js 5.x*
 - **Security:** Arcjet (Bot Protection, Rate Limiting, Shield WAF)
 - **Authentication:** JWT with `httpOnly` cookies & `bcrypt` hashing
 - **Validation:** Zod schemas
+- **Containerization:** Docker
+- **Deployment** Kubernetes-Minikube
+- **CI/CD Pipeline:** Github Actions 
 - **Logging:** Winston + Morgan
 - **Code Quality:** ESLint + Prettier
 
